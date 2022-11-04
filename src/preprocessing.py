@@ -22,7 +22,7 @@ import pickle
 import subprocess
 import sys 
 import time
-
+from sys import platform
 from PIL import Image
 
 from tqdm import tqdm
@@ -46,12 +46,23 @@ def tilesGenerator(qupathProj, shellScript, groovyScript, wsi=None):
     
     """ Generates tiles through the execution of a shell script that, in turn, runs the qupath command on the provided QuPath project and groovy script """
     
-    if wsi is not None:
-        p = subprocess.Popen(["sh", f"{shellScript}", f"{wsi}", f"{qupathProj}", \
-                            f"{groovyScript}"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-    else:
-        p = subprocess.Popen(["sh", f"{shellScript}", f"{qupathProj}", f"{groovyScript}"], \
-                             stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    if platform == "linux" or platform == "linux2" or platform == "darwin":
+
+        if wsi is not None:
+            p = subprocess.Popen(["sh", f"{shellScript}", f"{wsi}", f"{qupathProj}", \
+                                f"{groovyScript}"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        else:
+            p = subprocess.Popen(["sh", f"{shellScript}", f"{qupathProj}", f"{groovyScript}"], \
+                                stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    elif platform == "win32":
+
+        if wsi is not None:
+            p = subprocess.Popen([r"C:\Users\%USERNAME%\AppData\Local\QuPath-0.2.3\QuPath-0.2.3 (console).exe", "script" ,"-i", fr"{wsi}","-p",fr"{qupathProj}", fr"{groovyScript}"], shell=True,stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
+        else:
+            p = subprocess.Popen([r"C:\Users\%USERNAME%\AppData\Local\QuPath-0.2.3\QuPath-0.2.3 (console).exe", "script" ,"-p",fr"{qupathProj}", fr"{groovyScript}"], shell=True,stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
+
     while(True):
         retcode = p.poll() 
         line = p.stdout.readline()
