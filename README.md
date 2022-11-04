@@ -143,7 +143,8 @@ A Graphical User Interface (GUI), one for Windows and the other one for Linux op
 export PATH=$PATH:/place/with/the/GUI
 ````
 ### Usage
-![Figure 3](figures/Figure3.png)
+![Figure 3-1](figures/Figure3-1.png)
+![Figure 3-2](figures/Figure3-2.png)
 
 **Figure 3. GUI appearance in Linux operating system.** The upper part in whites shows the default options provided by the GUI whereas the lower part in grey shows the advanced options made available by ticking the box *Advanced Options*
 
