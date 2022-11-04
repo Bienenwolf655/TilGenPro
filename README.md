@@ -83,7 +83,6 @@ python tilesPreprocessing.py --help
 Notably, in case there is the need to process only a subset of the WSIs belonging to the QuPath project, these can be provided in input in two different ways:
 
 1) by providing through the optional argument *--wsiDir* the absolute path to a folder containing a file called *slidesToProcess.csv* built by the user. 
-
 **NOTE!** The file **has to** be called slidesToProcess.csv. It can contain as many column as wanted but it **must** contain at least a column called 'Slide' where are stored, in each row, the full names (e.g. wsi_name.mrxs) of the WSIs to process.
 
 ``` bash
@@ -129,21 +128,19 @@ Finally, if the optional argument *--jpgNormTiles* is provided, all the normaliz
 A Graphical User Interface (GUI), one for Windows and the other one for Linux operating systems, has been developed and does not require any packages to be pre-installed. The download file can be found under [...]
 
 ### Windows operating system
-1) Download the gui.exe file
-2) Open the file by double clicking on the GUI icon
+1) Download the GUI-WIN.zip file and unzip the file
+2) Copy the gui.exe to PathTo/TilGenPro
+3) Open the file by double clicking on the GUI icon
 
-### Linux operating system
-1) Download the gui.tar.xz file and navigate to the directory where the file was dowloaded
-2) Unzip the compressed tar archive as follows:
-``` bash
-tar -xf gui.tar.xz
-````
+### Linux operating system/MacOS (only supports arm64 [silicon] architechture)
+1) Download the  GUI-LINUX.zip/GUI-MACOS.zip file and unzip the file
+2) Copy the GUI-LINUX/GUI-MACOS.app to PathTo/TilGenPro
 3) Open the file either:
     - by typing ```gui ``` in the command line
     - or by double clicking on the GUI icon
 *Optional*: if you want to add the GUI to the global namespace of your command line (and being able to open it without navigating in the directory were the file was downloaded) use he following command:
 ``` bash
-sudo cp ./gui ./usr/local/bin/name_you_want_to_call_the_gui
+export PATH=$PATH:/place/with/the/GUI
 ````
 ### Usage
 ![Figure 3](figures/Figure3.png)
